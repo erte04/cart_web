@@ -1,27 +1,47 @@
 <template>
-  <div id="app">
-    <ProductList />
-  </div>
+  <v-app>
+    <v-app-bar app color="primary" dark>
+      <div class="d-flex align-center"></div>
+
+      <v-spacer></v-spacer>
+    </v-app-bar>
+
+    <v-content
+      ><v-container fluid>
+        <v-row>
+          <v-col cols="8">
+            <v-card class="ma-12 pa-12">
+              <ProductList />
+            </v-card>
+          </v-col>
+          <v-col cols="4">
+            <v-row
+              :align="alignment"
+              :justify="justify"
+              class="grey lighten-5"
+              style="height: 300px;"
+            >
+              <ProductList />
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import ProductList from "./components/ProductList.vue";
+import ProductList from "./components/ProductList";
 
 export default {
   name: "App",
+
   components: {
     ProductList
-  }
+  },
+
+  data: () => ({
+    //
+  })
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
