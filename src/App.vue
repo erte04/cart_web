@@ -14,16 +14,7 @@
               <ProductList />
             </v-card>
           </v-col>
-          <v-col cols="4">
-            <v-row
-              :align="alignment"
-              :justify="justify"
-              class="grey lighten-5"
-              style="height: 300px;"
-            >
-              <ProductList />
-            </v-row>
-          </v-col>
+          <v-col cols="4"> </v-col>
         </v-row>
       </v-container>
     </v-content>
