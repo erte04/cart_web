@@ -14,7 +14,9 @@
               <ProductList />
             </v-card>
           </v-col>
-          <v-col cols="4"> </v-col>
+          <v-col cols="4">
+            <v-card class="ma-12 pa-12"><Cart /></v-card>
+          </v-col>
         </v-row>
       </v-container>
     </v-content>
@@ -23,12 +25,14 @@
 
 <script>
 import ProductList from "./components/ProductList";
+import Cart from "./components/Cart";
 
 export default {
   name: "App",
 
   components: {
-    ProductList
+    ProductList,
+    Cart
   },
 
   data: () => ({

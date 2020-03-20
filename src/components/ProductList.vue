@@ -1,58 +1,43 @@
 <template>
   <div class="products">
     <h1>Produkty</h1>
-    <div v-if="posts && posts.length">
-      <v-row v-for="post of posts" :key="post.id">
+    <div v-if="products && products.length">
+      <v-row v-for="product of products" :key="product.id" class="product">
         <v-col cols="1">
-          <strong>{{ post.id }}</strong>
+          <strong>{{ product.id }}</strong>
         </v-col>
         <v-col cols="3">
-          <v-img :src="post.image" width="100px" height="100px"></v-img>
+          <v-img :src="product.image"></v-img>
         </v-col>
-        <v-col cols="8">
-          {{ post.name }}
+        <v-col cols="4">
+          {{ product.name }}
         </v-col>
-        <v-col cols="12">
-          <v-btn small color="primary">Dodaj do koszyka</v-btn>
+        <v-col cols="4">
+          <v-col cols="8">
+            <v-text-field
+              v-model="product.quantity"
+              type="number"
+              label="Ilość"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="8">
+            <v-btn small color="primary">Dodaj do koszyka</v-btn>
+          </v-col>
         </v-col>
       </v-row>
     </div>
-    <ul v-if="errors && errors.length">
-      <li v-for="error of errors" :key="error">
-        {{ error.message }}
-      </li>
-    </ul>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import { mapState } from "vuex";
 
 export default {
-  data() {
-    return {
-      posts: [],
-      errors: []
-    };
-  },
-
-  // Fetches posts when the component is created.
+  computed: mapState({
+    products: state => state.product.list
+  }),
   created() {
-    axios
-      .get(`http://localhost/product`, {
-        withCredentials: true,
-        auth: {
-          username: "myusername",
-          password: "mypassword"
-        }
-      })
-      .then(response => {
-        // JSON responses are automatically parsed.
-        this.posts = response.data;
-      })
-      .catch(e => {
-        this.errors.push(e);
-      });
+    this.$store.dispatch("product/getProducts");
   }
 };
 </script>
@@ -72,5 +57,18 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.product {
+  background-color: #81ecec;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 10px 0;
+}
+
+.product .v-image {
+  border-radius: 5px;
+  width: 100%;
+  height: 100px;
 }
 </style>
