@@ -6,22 +6,19 @@
         <v-col cols="1">
           <strong>{{ product.id }}</strong>
         </v-col>
-        <v-col cols="3">
+        <v-col cols="2">
           <v-img :src="product.image"></v-img>
         </v-col>
         <v-col cols="4">
           {{ product.name }}
         </v-col>
         <v-col cols="4">
+          <v-col cols="8"> Cena: {{ product.price }}zł</v-col>
+          <v-col cols="8"> Ilość w magazynie: {{ product.quantity }} </v-col>
           <v-col cols="8">
-            <v-text-field
-              v-model="product.quantity"
-              type="number"
-              label="Ilość"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="8">
-            <v-btn small color="primary">Dodaj do koszyka</v-btn>
+            <v-btn small color="primary" @click="addProductToCart(product)"
+              >Dodaj do koszyka</v-btn
+            >
           </v-col>
         </v-col>
       </v-row>
@@ -30,12 +27,13 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   computed: mapState({
     products: state => state.product.list
   }),
+  methods: mapActions("cart", ["addProductToCart"]),
   created() {
     this.$store.dispatch("product/getProducts");
   }
@@ -47,18 +45,6 @@ export default {
 h3 {
   margin: 40px 0 0;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-
 .product {
   background-color: #81ecec;
   border-radius: 20px;
@@ -68,7 +54,5 @@ a {
 
 .product .v-image {
   border-radius: 5px;
-  width: 100%;
-  height: 100px;
 }
 </style>

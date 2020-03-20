@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Parameters } from "../parameters";
 
 const state = {
   list: []
@@ -7,9 +8,8 @@ const state = {
 const actions = {
   getProducts({ commit }) {
     axios
-      .get(`http://localhost/product`)
+      .get(Parameters.url + `/product`)
       .then(response => {
-        console.log("response", response.data);
         commit("setProducts", response.data);
       })
       .catch(e => {
