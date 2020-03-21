@@ -22,6 +22,11 @@ const actions = {
         commit("setUser", response.data);
       })
       .catch(e => {
+        this.dispatch(
+          "message/showMessage",
+          "Błąd! Podałeś błędny login lub hasło!"
+        );
+        commit("setUser", { token: "", refreshToken: "" });
         console.log(e);
       });
   }
@@ -30,6 +35,11 @@ const actions = {
 const mutations = {
   setUser(state, { token, refreshToken }) {
     state.user = { ...state.user, token, refreshToken };
+    if (token) {
+      state.isLogged = true;
+    } else {
+      state.isLogged = false;
+    }
   }
 };
 

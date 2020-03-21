@@ -3,7 +3,7 @@ const state = {
 };
 
 const actions = {
-    addProductToCart({ state, commit }, product) {
+  addProductToCart({ state, commit }, product) {
     const cartItem = state.list.find(item => item.id === product.id);
     if (!cartItem) {
       product = { ...product, stock: 1 };
@@ -11,6 +11,11 @@ const actions = {
     } else {
       if (cartItem.stock < cartItem.quantity) {
         commit("incStock", cartItem);
+      } else {
+        this.dispatch(
+          "message/showMessage",
+          "Masz w koszyku maksymalną ilość produktu: " + cartItem.name
+        );
       }
     }
   },

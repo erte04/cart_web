@@ -29,7 +29,6 @@ export default {
   methods: mapActions("login", ["checkLogin"]),
 
   beforeUpdate() {
-    console.log("sssssssssss");
     this.$store.dispatch(
       "product/getProducts",
       this.$store.state.login.user.token

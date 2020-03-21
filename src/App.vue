@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <Message />
     <v-app-bar app color="primary" dark>
       <div class="d-flex align-center"></div>
       <Login />
@@ -27,6 +28,7 @@
 import ProductList from "./components/ProductList";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
+import Message from "./components/Message";
 
 export default {
   name: "App",
@@ -34,7 +36,8 @@ export default {
   components: {
     ProductList,
     Cart,
-    Login
+    Login,
+    Message
   },
 
   data: () => ({

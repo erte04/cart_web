@@ -8,15 +8,18 @@ const state = {
 const actions = {
   getProducts({ commit }, token) {
     console.log("token", token);
-
-    axios
-      .get(Parameters.url + `/product`, { params: { token } })
-      .then(response => {
-        commit("setProducts", response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    if (token) {
+      axios
+        .get(Parameters.url + `/product`, { params: { token } })
+        .then(response => {
+          commit("setProducts", response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    } else {
+      commit("setProducts", []);
+    }
   }
 };
 
