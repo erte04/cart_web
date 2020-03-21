@@ -31,12 +31,10 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   computed: mapState({
-    products: state => state.product.list
+    products: state => state.product.list,
+    login: state => state.login.user
   }),
-  methods: mapActions("cart", ["addProductToCart"]),
-  created() {
-    this.$store.dispatch("product/getProducts");
-  }
+  methods: mapActions("cart", ["addProductToCart"])
 };
 </script>
 
